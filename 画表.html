@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #000000;
+        }
+        #cav{
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cav" width="300" height="300">
+</canvas>
+<script>
+    var oCav=document.querySelector('#cav');
+    var oCvs=oCav.getContext('2d');
+    for(var i=0;i<60;i++){
+        oCvs.beginPath();
+        oCvs.moveTo(150,150);
+        oCvs.arc(150,150,100,i*6*Math.PI/180,6*(i+1)*Math.PI/180);
+        oCvs.stroke();
+        oCvs.closePath();
+    }
+    for(var n=1;n<61;n++){
+        oCvs.beginPath();
+        oCvs.moveTo(150,150);
+        for(var s=1;s<13;s++){
+            if(n==5*s){
+                n=5*s+1;
+            }
+        }
+        oCvs.arc(150,150,90,6*n*Math.PI/180,6*n*Math.PI/180);
+        oCvs.lineWidth=3;
+        oCvs.strokeStyle='white';
+        oCvs.stroke();
+        oCvs.closePath();
+    }
+    for(var j=0;j<12;j++){
+        oCvs.beginPath();
+        oCvs.moveTo(150,150);
+        oCvs.arc(150,150,80,30*j*Math.PI/180,30*j*Math.PI/180);
+        oCvs.lineWidth=3;
+        oCvs.strokeStyle='white';
+        oCvs.stroke();
+        oCvs.closePath();
+    }
+    run();
+    setInterval(function () {
+        run();
+    },1000);
+    function run() {
+        oCvs.clearRect(95,9,110,110);
+        var date=new Date();
+        var Dategetsecond=date.getSeconds();
+        var Dategetminute=date.getMinutes()+Dategetsecond/60;
+        var Dategethour=date.getHours()+Dategetminute/60;
+        oCvs.beginPath();//秒针
+        oCvs.moveTo(150,150);
+        oCvs.arc(150,150,55,(Dategetsecond*6-90)*Math.PI/180,(Dategetsecond*6-90)*Math.PI/180);
+        oCvs.strokeStyle='red';
+        oCvs.lineWidth=2;
+        oCvs.stroke();
+        oCvs.closePath();
+
+        oCvs.beginPath();//分针
+        oCvs.moveTo(150,150);
+        oCvs.arc(150,150,45,(Dategetminute*6-90)*Math.PI/180,(Dategetminute*6-90)*Math.PI/180);
+        oCvs.strokeStyle='green';
+        oCvs.lineWidth=4;
+        oCvs.stroke();
+        oCvs.closePath();
+
+        oCvs.beginPath();//时针
+        oCvs.moveTo(150,150);
+        oCvs.arc(150,150,35,(Dategethour*30-90)*Math.PI/180,(Dategethour*30-90)*Math.PI/180);
+        oCvs.strokeStyle='yellow';
+        oCvs.lineWidth=6;
+        oCvs.stroke();
+        oCvs.closePath();
+    }
+
+
+</script>
+</body>
+</html>

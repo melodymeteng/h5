@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #000000;
+        }
+        #cav{
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cav" width="500" height="500"></canvas>
+<script>
+    var oCav=document.querySelector('#cav');
+    var oCvs=oCav.getContext('2d');
+    oCav.onmousedown=function () {
+        console.log(1111);
+//        e = e || window.event;
+        var iLeft=event.clientX;
+        var iTop=event.clientY;
+        oCvs.moveTo(iLeft ,iTop);
+        oCav.onmousemove=function () {
+            console.log(222);
+//            e = e || window.event;
+            var disX=event.clientX;
+            var disY=event.clientY;
+            oCvs.lineTo(disX,disY);
+            oCvs.strokeStyle='red';
+            oCvs.stroke();
+        };
+        oCav.onmouseup=function () {
+            oCav.onmousemove = null;
+        }
+    }
+</script>
+</body>
+</html>
